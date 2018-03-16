@@ -1,0 +1,173 @@
+﻿
+/******/
+*, html {
+    margin: 0px;
+    padding: 0px;
+}
+
+.hl-reset-css {
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    list-style-type: none !important;
+}
+
+a {
+    text-decoration: none !important;
+    color: rgb(71, 145, 200) !important;
+}
+/******/
+/*head*/
+.hl-logo a {
+    padding: 0 !important;
+}
+
+.hl-dropdown {
+    font-weight: bold;
+    padding: 15px;
+    font-size: 16px;
+}
+
+    .hl-dropdown a {
+        padding: 17.9px;
+    }
+
+        .hl-dropdown a:hover {
+            background-color: #9BE8CB !important;
+        }
+
+.hl__head nav {
+    background: white !important;
+}
+
+.hl__head--nav {
+}
+/*head*/
+
+/*Book*/
+/*ListView*/
+.hl-book img {
+    width: 126px;
+    height: 170px;
+    max-width: 126px;
+}
+
+.hl-book .panel {
+    position: relative;
+    height: 291px;
+    width: 223.453px;
+    border-radius: 0;
+    border: 0.7px;
+    box-shadow: 1px 1px 3px 1px #ccc;
+    color: black;
+    overflow-x: hidden;
+}
+
+    .hl-book a:hover, .hl-book .panel:hover {
+        text-decoration: none;
+        color: #0bbed7;
+    }
+
+.hl-book .panel-body:hover img {
+    transform: translateY(-10px);
+    transition: linear;
+    transition-duration: 0.3s;
+}
+
+.hl-book .panel-body img {
+    margin-top: 10px;
+}
+
+.hl-book .panel-footer {
+    height: 81px;
+    background-color: #fff;
+    border: 0;
+}
+
+.hl-authorname {
+    color: #d92e2e;
+    font-weight: bold;
+}
+
+.hl-new {
+    position: absolute;
+    top: 0px;
+    left: -1px;
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.hl-special {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.hl-favou {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 35px !important;
+    height: 35px !important;
+}
+
+.hl-btn-details {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 25%;
+    border-radius: 0;
+    background-color: black;
+    opacity: .5;
+    color: white;
+    font-weight: bold;
+    transform: translateX(-100%);
+    transition: linear;
+    transition-duration: .3s;
+}
+
+    .hl-btn-details:hover {
+        background-color: rgb(42,100,150);
+        color: white;
+        opacity: 1;
+    }
+
+.hl-book .panel:hover .hl-btn-details {
+    transform: translateX(0);
+}
+
+.hl-quantity {
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+    width: 35px !important;
+    height: 35px !important;
+}
+
+.hl-btn-details span {
+    position: relative;
+    transition: 0.5s;
+}
+
+    .hl-btn-details span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: -3px;
+        right: 0;
+        transition: 0.5s;
+    }
+
+.hl-btn-details:hover span {
+    padding-right: 15px;
+}
+
+    .hl-btn-details:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+/*Book*/

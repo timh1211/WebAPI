@@ -1,0 +1,135 @@
+﻿@model HLLibrarySystemAPI.Models.v_AccountStudents
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<script type="text/javascript">
+        document.write('<style type="text/css">body{padding-bottom:20px}</style><a href="#"><img style="position:fixed;z-index:9999;top:65px;left:0" src="https://tuhocmmo.com/wp-content/uploads/2018/01/banner_left_1.png" _cke_saved_src="https://tuhocmmo.com/wp-content/uploads/2018/01/banner_left_1.png"/></a><a href="#"><img style="position:fixed;z-index:9999;top:45px;right:0" src="https://tuhocmmo.com/wp-content/uploads/2018/01/banner_right_2.png"/></a><div style="position:fixed;z-index:9999;bottom:-50px;left:0;width:100%;height:104px;"></div><a href="#"><img style="position:fixed;z-index:9999;bottom:20px;right:30px" src="https://tuhocmmo.com/wp-content/uploads/2018/01/banner_header.png"/></a><a href="#"><img style="position:fixed;z-index:9999;bottom:20px;left:150px;height:300px;" src="https://4.bp.blogspot.com/-OWysc1kGrCg/WiSliGWM_sI/AAAAAAAAnJw/9v2vD-DvuhATTpsLuS2fKK21hR8-CEOjACLcBGAs/s1600/tet%2B2018%2Bhuypts%2B%25281%2529.png"/></a>');
+        var no = 100;
+        var ie4up = (document.all) ? 1 : 0; var ns6up = (document.getElementById && !document.all) ? 1 : 0; function iecompattest() { return (document.compatMode && document.compatMode != 'BackCompat') ? document.documentElement : document.body } var dx, xp, yp; var am, stx, sty; var i, doc_width = 800, doc_height = 600; if (ns6up) { doc_width = self.innerWidth; doc_height = self.innerHeight } else if (ie4up) { doc_width = iecompattest().clientWidth; doc_height = iecompattest().clientHeight } dx = new Array(); xp = new Array(); yp = new Array(); am = new Array(); stx = new Array(); sty = new Array(); for (i = 0; i < no; ++i) { dx[i] = 0; xp[i] = Math.random() * (doc_width - 50); yp[i] = Math.random() * doc_height; am[i] = Math.random() * 20; stx[i] = 0.02 + Math.random() / 10; sty[i] = 0.7 + Math.random(); if (ie4up || ns6up) { document.write('<div id="dot' + i + '" style="POSITION:absolute;Z-INDEX:' + i + ';VISIBILITY:visible;TOP:15px;LEFT:15px;"><span style="font-size:18px;color:#fff">*</span><\/div>') } }
+</script>*@
+
+<div class="hl-login-block">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <img src="~/Images/logo/avtlogo.png" alt="Sign In" />
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    @if (ViewBag.Id != null)
+                    {
+                        @Html.EditorFor(model => model.stu_userName, new { htmlAttributes = new { @class = "form-control", @style = "display: block", @placeholder = "Enter your account", @Value = ViewBag.Id } })
+                        @Html.ValidationMessageFor(model => model.stu_userName, "", new { @class = "text-danger hl-error" })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.stu_userName, new { htmlAttributes = new { @class = "form-control", @style = "display: block", @placeholder = "Enter your account" } })
+                        @Html.ValidationMessageFor(model => model.stu_userName, "", new { @class = "text-danger hl-error" })
+                    }
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    @if (ViewBag.Id != null)
+                    {
+                        @Html.EditorFor(model => model.stu_password, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                                @type = "password",
+                                @style = "display: block",
+                                @placeholder = "Enter your password",
+                                @Value = ViewBag.Password
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.stu_password, "", new { @class = "text-danger hl-error" })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.stu_password, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                                @type = "password",
+                                @style = "display: block",
+                                @placeholder = "Enter your password"
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.stu_password, "", new { @class = "text-danger hl-error" })
+                    }
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="hl-chk-remember">
+                @Html.CheckBox("Remember") Remember me?
+            </div>
+            <div class="hl-forgot" style="margin-top: 5px;">
+                @Html.ActionLink("Did you forget your password?", "Forgot", "StudentsMVC")
+            </div>
+            <div class="form-group hl-btn-submit">
+                <div class="col-md-12">
+                    <input type="submit" value="SIGN IN" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="form-group hl-btn-submit">
+            <div class="col-md-12">
+                <a href="/Home/Index" class="btn btn-danger">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hl-login-block {
+        display: inline-block;
+        height: 40%;
+        width: 30%;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 5px 3px #ccc;
+        padding-bottom: 20px;
+        margin-top: 35px;
+        /*margin-left: -65px;*/
+        margin-left: 55px;
+        transition-duration: 1s;
+        transition-timing-function: ease-in-out;
+        margin-bottom: 20px;
+    }
+
+        .hl-login-block img:first-child {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            height: 30%;
+            width: 30%;
+        }
+
+        .hl-login-block .form-control {
+            padding: 20px;
+        }
+
+    .hl-btn-submit input, .hl-btn-submit a {
+        width: 65%;
+        margin-top: 7px;
+    }
+
+    .hl-btn-submit input {
+        margin-top: 15px;
+        margin-bottom: -15px;
+    }
+
+    li {
+        list-style-type: none;
+    }
+</style>

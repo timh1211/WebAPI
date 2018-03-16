@@ -1,0 +1,6 @@
+namespace HLLibrarySystemAPI.Areas.HelpPage.ModelDescriptions
+{
+    public class DictionaryModelDescription : KeyValuePairModelDescription
+    {
+    }
+}

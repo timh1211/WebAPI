@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Library Management</title>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!-- Angular LINQ -->
+    <script src="Scripts/node_modules/angular/angular.min.js"></script>
+    <script src="Scripts/node_modules/angular-linq/dist/ngLinq.min.js"></script>
+    <script src="Scripts/node_modules/linq/linq.min.js"></script>
+    <!--My CSS-->
+    <link href="Content/admin.css" rel="stylesheet" type="text/css" />
+    <!--My Script-->
+    <script src="Scripts/admin.js"></script>
+</head>
+<body>
+    <!--<div ng-show="loading" id="loading">
+        <img src="Images/background/earth.gif">
+    </div>-->
+    <div class="container-fluid" ng-app="myApp" ng-controller="myCtrl">
+        <!-- HL__head -->
+        <div class="row hl__head">
+            <nav class="nav navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header navbar-left hl-logo">
+                        <a class="navbar-brand" href="#"><img src="../Images/logo/logo1.gif" height="50" style="margin: 2px; margin-left: 35px;" title="Library Management" /></a>
+                    </div>
+                    <ul class="nav navbar-nav nav-tabs hl__head--nav">
+                        <li class="active"><a data-toggle="tab" href="#student-block">Student</a></li>
+                        <li><a data-toggle="tab" href="#book-block">Book</a></li>
+                        <li><a data-toggle="tab" href="#order-block">Order</a></li>
+                        <li><a data-toggle="tab" href="#chart-block">Chart</a></li>
+                    </ul>
+                    <div class="navbar-right dropdown hl-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="hl-admin-after-login"><a href=""><span class="glyphicon glyphicon-share"></span> Hi! {{sessions[1]}}</a></li>
+                            <li class="divider"></li>
+                            <li class="hl-admin-after-login"><a href="/Administrators/Logout"><span class="glyphicon glyphicon-share"></span> Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- HL__body -->
+        <div class="row hl__body tab-content" style="margin-top: -20px;">
+            <!-- Students Block -->
+            <div id="student-block" class="tab-pane fade in active">
+                <div class="col-md-6 panel panel-body panel-info hl__arm--left">
+                    <div class="panel-heading" style="margin-bottom: 15px;">
+                        <h3>Student Information</h3>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalStu" ng-click="addBtnStu();"><i class="fa fa-plus-square-o"></i></button>
+                    </div>
+                    <table id="stuTable" class="table table-hover table-condensed table-striped display">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Full Name</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Major</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stu in students">
+                                <td>{{ stu.stuID }}</td>
+                                <td>{{ stu.stuFirstName }} {{ stu.stuLastName }}</td>
+                                <td>{{ stu.stuAddress}}</td>
+                                <td>{{ stu.stuPhone }}</td>
+                                <td>{{ stu.majorID }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalStu" ng-click="getStudent(stu.stuID);"><i class="fa fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 panel panel-body panel-info hl__arm--right" id="accordion">
+                    <div class="panel-heading" style="padding-bottom: 44px; margin-bottom: 15px;">
+                        <h3>Student Account</h3>
+                    </div>
+                    <table id="accTable" class="table table-hover table-condensed table-striped display">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="acc in accs">
+                                <td>{{ acc.stuID }}</td>
+                                <td>{{ acc.stu_userName }}</td>
+                                <td>{{ acc.stu_password }}</td>
+                                <td>{{ acc.email }}</td>
+                                <td>{{ acc.statusStuAcc }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalAcc" ng-click="getAccount(acc.stu_userName);"><i class="fa fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Books block -->
+            <div id="book-block" class="tab-pane fade">
+                <div class="col-md-12 panel panel-body panel-info hl__arm--left">
+                    <div class="panel-heading" style="margin-bottom: 15px;">
+                        <h3>Books Information</h3>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBook" ng-click="addBtnBook();"><i class="fa fa-plus-square-o"></i></button>
+                    </div>
+                    <table id="bookTable" class="table table-hover table-condensed table-striped display">
+                        <colgroup>
+                            <col />
+                            <col />
+                            <col />
+                            <col />
+                            <col width="200"/>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>ISBN</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Image</th>
+                                <th>Quantity</th>
+                                <th>Status</th>
+                                <th>Special</th>
+                                <th>Lastest</th>
+                                <th>Views</th>
+                                <th>Category</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="book in books">
+                                <td>{{ book.callNumber }}</td>
+                                <td>{{ book.ISBN_Number }}</td>
+                                <td>{{ book.title }}</td>
+                                <td>{{ book.authorName }}</td>
+                                <td>{{ book.image }}</td>
+                                <td>{{ book.quantity }}</td>
+                                <td>{{ book.statusBook }}</td>
+                                <td>{{ book.special }}</td>
+                                <td>{{ book.lasted }}</td>
+                                <td>{{ book.views }}</td>
+                                <td>{{ book.categoryID }}</td>
+                                <td style="width: 100px;">
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalBook" ng-click="getBook(book.callNumber);"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-warning" ng-click="deleteBtnBook(book.callNumber);"><i class="glyphicon glyphicon-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Order block -->
+            <div id="order-block" class="tab-pane fade">
+                <div class="col-md-12 panel panel-body panel-info hl__arm--left">
+                    <div class="panel-heading" style="margin-bottom: 15px;">
+                        <h3 style="padding-bottom: 44px;">Borrowing Information</h3>
+                        <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBorrow" ng-click="addBtnBorrow();"><i class="fa fa-plus-square-o"></i></button>-->
+                    </div>
+                    <table id="borrowTable" class="table table-hover table-condensed table-striped display">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Book No.</th>
+                                <th>Quantity</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Checkout Date</th>
+                                <th>LateFees</th>
+                                <th>Number of Date</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="borrow in borrows">
+                                <td>{{ borrow.stu_userName }}</td>
+                                <td>{{ borrow.callNumber }}</td>
+                                <td>{{ borrow.unitQuantity }}</td>
+                                <td>{{ borrow.issueDate }}</td>
+                                <td>{{ borrow.dueDate }}</td>
+                                <td>{{ borrow.issueStatus }}</td>
+                                <td>{{ borrow.checkOutDate }}</td>
+                                <td>{{ borrow.lateFees }}</td>
+                                <td>{{ borrow.number_Date_Late }}</td>
+                                <td>{{ borrow.totalFees }}</td>
+                                <td style="width: 100px;">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBorrowCheckout" ng-click="getBorrowCheckout(borrow.callNumber, borrow.stu_userName);"><i class="fa fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Chart Block -->
+            <div id="chart-block" class="tab-pane fade">
+                <div class="col-md-12 panel panel-body panel-info hl__arm--left">
+                    <div class="panel-heading" style="margin-bottom: 15px;">
+                        <h3>Charts</h3>
+                        <div class="col-md-6" style="padding-bottom: 20px;">
+                            <input type="date" class="form-inline" id="sDay" ng-model="sDay"/>
+                            <input type="date" class="form-inline" id="eDay" ng-model="eDay"/>
+                            <button class="btn btn-success" ng-click="loadingChart();"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal edit, add -->
+        <!-- Borrow Edit -->
+        <div class="modal fade" id="modalBorrowCheckout" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="addBtnBorrow();">&times;</button>
+                        <h3>Checkout</h3>
+                    </div>
+                    <div class="modal-body form-group">
+                        <input type="date" ng-model="borrow.checkOutDate" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="updateButton" data-dismiss="modal" class="btn btn-primary" ng-click="updateBtnBorrowCheckout();">{{ addBorrow }}</button>
+                        <button type="button" class="btn btn-danger" ng-click="addBtnBorrow();"><i class="glyphicon glyphicon-refresh"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Book Edit -->
+        <div class="modal fade" id="modalBook" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="addBtnBook();">&times;</button>
+                        <h3>Book Information</h3>
+                    </div>
+                    <div class="modal-body form-group">
+                        <input type="text" placeholder="Call Number" id="unreadonly7" readonly ng-model="book.callNumber" class="form-control" />
+                        <input type="text" placeholder="ISBN Number" ng-model="book.ISBN_Number" class="form-control" />
+                        <input type="text" placeholder="Title" ng-model="book.title" class="form-control" />
+                        <input type="text" placeholder="Author Name" ng-model="book.authorName" class="form-control" />
+                        <input type="text" placeholder="Image" ng-model="book.image" id="unreadonly12" readonly class="form-control" />
+                        <input type="text" placeholder="Category ID" id="unreadonly8" readonly ng-model="book.categoryID" class="form-control" />
+                        <select id="unreadonly8-1" value="0" class="form-control" ng-model="selectedCate" ng-options="x.cateName for x in cates">
+                            <option value="0">--Select Category--</option>
+                        </select>
+                        <input type="text" placeholder="5" id="unreadonly9" readonly ng-model="book.quantity" class="form-control" />
+                        <input type="text" placeholder="Exists" id="unreadonly10" readonly ng-model="book.statusBook" class="form-control" />
+                        <label class="checkbox-inline form-inline"><input type="checkbox" ng-model="book.special" /> Special</label>
+                        <label class="checkbox-inline form-inline"><input type="checkbox" ng-model="book.lasted" /> Lasted</label>
+                        <input type="text" placeholder="0" id="unreadonly11" readonly ng-model="book.views" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="updateButton" data-dismiss="modal" class="btn btn-primary" ng-click="updateBtnBook();">{{ addBook }}</button>
+                        <button type="button" class="btn btn-warning" onclick="editImage();"><i class="glyphicon glyphicon-picture"></i></button>
+                        <!--<button type="button" class="btn btn-danger" ng-click="addBtnBook();"><i class="glyphicon glyphicon-refresh"></i></button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Student Edit -->
+        <div class="modal fade" id="modalStu" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="addBtnStu();">&times;</button>
+                        <h3>Student Information</h3>
+                    </div>
+                    <div class="modal-body form-group form-horizontal">
+                        <input type="text" placeholder="Student ID" id="unreadonly" readonly ng-model="student.stuID" class="form-control" />
+                        <input type="text" placeholder="First Name" id="unreadonly1" readonly ng-model="student.stuFirstName" class="form-control" />
+                        <input type="text" placeholder="Last Name" id="unreadonly2" readonly ng-model="student.stuLastName" class="form-control" />
+                        <input type="text" placeholder="MarjorID" id="unreadonly3" readonly ng-model="student.majorID" class="form-control" />
+                        <select id="unreadonly3-1" placeholder="Major" class="form-control" ng-model="selectedMajor" ng-options="x.majorName for x in majors"></select>
+                        <input type="text" placeholder="Address" ng-model="student.stuAddress" class="form-control" />
+                        <input type="text" placeholder="Phone" ng-model="student.stuPhone" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="updateButton" data-dismiss="modal" class="btn btn-primary" ng-click="updateBtnStu();">{{ addStu }}</button>
+                        <button type="button" class="btn btn-danger" ng-click="addBtnStu();"><i class="glyphicon glyphicon-refresh"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Account Edit -->
+        <div class="modal fade" id="modalAcc" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="addBtnAcc();">&times;</button>
+                        <h3>Student Account</h3>
+                    </div>
+                    <div class="modal-body form-group form-horizontal">
+                        <input type="text" placeholder="Student ID" readonly ng-model="acc.stuID" id="unreadonly4" class="form-control" />
+                        <input type="text" placeholder="Username" readonly ng-model="acc.stu_userName" id="unreadonly5" class="form-control" />
+                        <input type="text" placeholder="Password" ng-model="acc.stu_password" class="form-control" />
+                        <input type="text" placeholder="Email" ng-model="acc.email" class="form-control" />
+                        <input type="text" placeholder="Status" ng-model="acc.statusStuAcc" id="unreadonly6" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <!--updateClick();-->
+                        <button type="button" id="updateButton" data-dismiss="modal" class="btn btn-primary" ng-click="updateBtnAcc();">{{ addAcc }}</button>
+                        <!--<button type="button" class="btn btn-danger" ng-click="addBtnAcc();"><i class="glyphicon glyphicon-refresh"></i></button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal edit, add -->
+        <div class="row hl__feet">
+
+        </div>
+    </div>
+    <!-- Angular Js -->
+</body>
+</html>

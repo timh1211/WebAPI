@@ -1,0 +1,38 @@
+﻿@charset "utf-8";
+/* Đây là cảnh vuông của chuyển động của con trỏ chuột dưới đây. */
+
+.cloud-zoom-lens {
+    background-color: #fff;
+    cursor: move;
+}
+
+/* Đây là văn bản tiêu đề */
+
+.cloud-zoom-title {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute !important;
+    background-color: #000;
+    color: #fff;
+    padding: 3px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    top: 0px;
+}
+
+/* Đây là cửa sổ phóng to. */
+
+.cloud-zoom-big {
+    border: 2px solid #ccc;
+    overflow: hidden;
+}
+
+/* Đây là thông báo tải. */
+
+.cloud-zoom-loading {
+    color: white;
+    background: #222;
+    padding: 3px;
+    border: 1px solid #000;
+}

@@ -1,0 +1,944 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LibraryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountStudent">
+          <Key>
+            <PropertyRef Name="stu_userName" />
+          </Key>
+          <Property Name="stu_userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stu_password" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="stuID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="statusStuAcc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Administrators">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="posID" Type="int" />
+          <Property Name="statusAdminAcc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="callNumber" />
+          </Key>
+          <Property Name="callNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ISBN_Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="authorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="image" Type="nvarchar" MaxLength="500" />
+          <Property Name="categoryID" Type="nvarchar" MaxLength="50" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="statusBook" Type="nvarchar" MaxLength="50" />
+          <Property Name="special" Type="bit" />
+          <Property Name="lasted" Type="bit" />
+          <Property Name="views" Type="int" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="cateID" />
+          </Key>
+          <Property Name="cateID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cateName" Type="nvarchar" MaxLength="50" />
+          <Property Name="keywords" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Majors">
+          <Key>
+            <PropertyRef Name="majorID" />
+          </Key>
+          <Property Name="majorID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="majorName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="posID" />
+          </Key>
+          <Property Name="posID" Type="int" Nullable="false" />
+          <Property Name="posName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rent_Details">
+          <Key>
+            <PropertyRef Name="stu_userName" />
+            <PropertyRef Name="callNumber" />
+          </Key>
+          <Property Name="stu_userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="callNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="unitQuantity" Type="int" />
+          <Property Name="issueDate" Type="date" />
+          <Property Name="dueDate" Type="date" />
+          <Property Name="issueStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="checkOutDate" Type="date" />
+          <Property Name="lateFees" Type="int" />
+          <Property Name="number_Date_Late" Type="int" />
+          <Property Name="totalFees" Type="int" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="stuID" />
+          </Key>
+          <Property Name="stuID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stuFirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuPhone" Type="bigint" />
+          <Property Name="majorID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LibraryDB.dbo.v_AccountAdmin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_AccountAdmin">
+          <Key>
+            <PropertyRef Name="userName" />
+            <PropertyRef Name="posID" />
+          </Key>
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="statusAdminAcc" Type="nvarchar" MaxLength="50" />
+          <Property Name="posID" Type="int" Nullable="false" />
+          <Property Name="posName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LibraryDB.dbo.v_AccountAdmins' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_AccountAdmins">
+          <Key>
+            <PropertyRef Name="userName" />
+            <PropertyRef Name="posID" />
+          </Key>
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="statusAdminAcc" Type="nvarchar" MaxLength="50" />
+          <Property Name="posID" Type="int" Nullable="false" />
+          <Property Name="posName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LibraryDB.dbo.v_AccountStudents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_AccountStudents">
+          <Key>
+            <PropertyRef Name="stuID" />
+            <PropertyRef Name="stu_userName" />
+          </Key>
+          <Property Name="stuID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stuLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuFirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stu_userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stu_password" Type="nvarchar" MaxLength="50" />
+          <Property Name="statusStuAcc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LibraryDB.dbo.v_RentalDetailsReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_RentalDetailsReport">
+          <Key>
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="callNumber" />
+            <PropertyRef Name="stu_userName" />
+            <PropertyRef Name="stuID" />
+          </Key>
+          <Property Name="Expr1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="callNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="unitQuantity" Type="int" />
+          <Property Name="issueDate" Type="date" />
+          <Property Name="dueDate" Type="date" />
+          <Property Name="issueStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="checkOutDate" Type="date" />
+          <Property Name="lateFees" Type="int" />
+          <Property Name="number_Date_Late" Type="int" />
+          <Property Name="totalFees" Type="int" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="stu_userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stuID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stuFirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuPhone" Type="bigint" />
+          <Property Name="majorID" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="majorName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LibraryDB.dbo.v_StudentInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_StudentInfo">
+          <Key>
+            <PropertyRef Name="stuID" />
+            <PropertyRef Name="stu_userName" />
+          </Key>
+          <Property Name="stuID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stuFirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuPhone" Type="bigint" />
+          <Property Name="majorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stu_userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stu_password" Type="nvarchar" MaxLength="50" />
+          <Property Name="statusStuAcc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LibraryDB.dbo.v_StudentManagementAPI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_StudentManagementAPI">
+          <Key>
+            <PropertyRef Name="stuID" />
+            <PropertyRef Name="majorID" />
+            <PropertyRef Name="stu_userName" />
+          </Key>
+          <Property Name="stuID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stuFirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="stuPhone" Type="bigint" />
+          <Property Name="majorID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="majorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="stu_userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stu_password" Type="nvarchar" MaxLength="50" />
+          <Property Name="statusStuAcc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_AccountStudent_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="AccountStudent" Type="Self.AccountStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="stuID" />
+            </Principal>
+            <Dependent Role="AccountStudent">
+              <PropertyRef Name="stuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administrators_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="0..1" />
+          <End Role="Administrators" Type="Self.Administrators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="posID" />
+            </Principal>
+            <Dependent Role="Administrators">
+              <PropertyRef Name="posID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Books_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="cateID" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Details_AccountStudent">
+          <End Role="AccountStudent" Type="Self.AccountStudent" Multiplicity="1" />
+          <End Role="Rent_Details" Type="Self.Rent_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountStudent">
+              <PropertyRef Name="stu_userName" />
+            </Principal>
+            <Dependent Role="Rent_Details">
+              <PropertyRef Name="stu_userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Details_Books">
+          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="Rent_Details" Type="Self.Rent_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="callNumber" />
+            </Principal>
+            <Dependent Role="Rent_Details">
+              <PropertyRef Name="callNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Majors">
+          <End Role="Majors" Type="Self.Majors" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Majors">
+              <PropertyRef Name="majorID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="majorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="hl_StudentInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="stuUserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="LibraryDBModelStoreContainer">
+          <EntitySet Name="AccountStudent" EntityType="Self.AccountStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Administrators" EntityType="Self.Administrators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Majors" EntityType="Self.Majors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rent_Details" EntityType="Self.Rent_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_AccountAdmin" EntityType="Self.v_AccountAdmin" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_AccountAdmin].[userName] AS [userName], 
+    [v_AccountAdmin].[password] AS [password], 
+    [v_AccountAdmin].[name] AS [name], 
+    [v_AccountAdmin].[statusAdminAcc] AS [statusAdminAcc], 
+    [v_AccountAdmin].[posID] AS [posID], 
+    [v_AccountAdmin].[posName] AS [posName]
+    FROM [dbo].[v_AccountAdmin] AS [v_AccountAdmin]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_AccountAdmins" EntityType="Self.v_AccountAdmins" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_AccountAdmins].[userName] AS [userName], 
+    [v_AccountAdmins].[password] AS [password], 
+    [v_AccountAdmins].[name] AS [name], 
+    [v_AccountAdmins].[statusAdminAcc] AS [statusAdminAcc], 
+    [v_AccountAdmins].[posID] AS [posID], 
+    [v_AccountAdmins].[posName] AS [posName]
+    FROM [dbo].[v_AccountAdmins] AS [v_AccountAdmins]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_AccountStudents" EntityType="Self.v_AccountStudents" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_AccountStudents].[stuID] AS [stuID], 
+    [v_AccountStudents].[stuLastName] AS [stuLastName], 
+    [v_AccountStudents].[stuFirstName] AS [stuFirstName], 
+    [v_AccountStudents].[stu_userName] AS [stu_userName], 
+    [v_AccountStudents].[stu_password] AS [stu_password], 
+    [v_AccountStudents].[statusStuAcc] AS [statusStuAcc]
+    FROM [dbo].[v_AccountStudents] AS [v_AccountStudents]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_RentalDetailsReport" EntityType="Self.v_RentalDetailsReport" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_RentalDetailsReport].[Expr1] AS [Expr1], 
+    [v_RentalDetailsReport].[callNumber] AS [callNumber], 
+    [v_RentalDetailsReport].[unitQuantity] AS [unitQuantity], 
+    [v_RentalDetailsReport].[issueDate] AS [issueDate], 
+    [v_RentalDetailsReport].[dueDate] AS [dueDate], 
+    [v_RentalDetailsReport].[issueStatus] AS [issueStatus], 
+    [v_RentalDetailsReport].[checkOutDate] AS [checkOutDate], 
+    [v_RentalDetailsReport].[lateFees] AS [lateFees], 
+    [v_RentalDetailsReport].[number_Date_Late] AS [number_Date_Late], 
+    [v_RentalDetailsReport].[totalFees] AS [totalFees], 
+    [v_RentalDetailsReport].[title] AS [title], 
+    [v_RentalDetailsReport].[stu_userName] AS [stu_userName], 
+    [v_RentalDetailsReport].[stuID] AS [stuID], 
+    [v_RentalDetailsReport].[stuFirstName] AS [stuFirstName], 
+    [v_RentalDetailsReport].[stuLastName] AS [stuLastName], 
+    [v_RentalDetailsReport].[stuAddress] AS [stuAddress], 
+    [v_RentalDetailsReport].[stuPhone] AS [stuPhone], 
+    [v_RentalDetailsReport].[majorID] AS [majorID], 
+    [v_RentalDetailsReport].[email] AS [email], 
+    [v_RentalDetailsReport].[majorName] AS [majorName]
+    FROM [dbo].[v_RentalDetailsReport] AS [v_RentalDetailsReport]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_StudentInfo" EntityType="Self.v_StudentInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_StudentInfo].[stuID] AS [stuID], 
+    [v_StudentInfo].[stuFirstName] AS [stuFirstName], 
+    [v_StudentInfo].[stuLastName] AS [stuLastName], 
+    [v_StudentInfo].[stuAddress] AS [stuAddress], 
+    [v_StudentInfo].[stuPhone] AS [stuPhone], 
+    [v_StudentInfo].[majorName] AS [majorName], 
+    [v_StudentInfo].[stu_userName] AS [stu_userName], 
+    [v_StudentInfo].[stu_password] AS [stu_password], 
+    [v_StudentInfo].[statusStuAcc] AS [statusStuAcc]
+    FROM [dbo].[v_StudentInfo] AS [v_StudentInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_StudentManagementAPI" EntityType="Self.v_StudentManagementAPI" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_StudentManagementAPI].[stuID] AS [stuID], 
+    [v_StudentManagementAPI].[stuFirstName] AS [stuFirstName], 
+    [v_StudentManagementAPI].[stuLastName] AS [stuLastName], 
+    [v_StudentManagementAPI].[stuAddress] AS [stuAddress], 
+    [v_StudentManagementAPI].[stuPhone] AS [stuPhone], 
+    [v_StudentManagementAPI].[majorID] AS [majorID], 
+    [v_StudentManagementAPI].[majorName] AS [majorName], 
+    [v_StudentManagementAPI].[stu_userName] AS [stu_userName], 
+    [v_StudentManagementAPI].[stu_password] AS [stu_password], 
+    [v_StudentManagementAPI].[statusStuAcc] AS [statusStuAcc]
+    FROM [dbo].[v_StudentManagementAPI] AS [v_StudentManagementAPI]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AccountStudent_Students" Association="Self.FK_AccountStudent_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="AccountStudent" EntitySet="AccountStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administrators_Positions" Association="Self.FK_Administrators_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Administrators" EntitySet="Administrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Books_Categories" Association="Self.FK_Books_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Details_AccountStudent" Association="Self.FK_Rent_Details_AccountStudent">
+            <End Role="AccountStudent" EntitySet="AccountStudent" />
+            <End Role="Rent_Details" EntitySet="Rent_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Details_Books" Association="Self.FK_Rent_Details_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Rent_Details" EntitySet="Rent_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Majors" Association="Self.FK_Students_Majors">
+            <End Role="Majors" EntitySet="Majors" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibraryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountStudent">
+          <Key>
+            <PropertyRef Name="stu_userName" />
+          </Key>
+          <Property Name="stu_userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stu_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="stuID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="statusStuAcc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_AccountStudent_Students" FromRole="AccountStudent" ToRole="Students" />
+          <NavigationProperty Name="Rent_Details" Relationship="Self.FK_Rent_Details_AccountStudent" FromRole="AccountStudent" ToRole="Rent_Details" />
+        </EntityType>
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="posID" Type="Int32" />
+          <Property Name="statusAdminAcc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Administrators_Positions" FromRole="Administrators" ToRole="Positions" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="callNumber" />
+          </Key>
+          <Property Name="callNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ISBN_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="authorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="categoryID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="statusBook" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="special" Type="Boolean" />
+          <Property Name="lasted" Type="Boolean" />
+          <Property Name="views" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Books_Categories" FromRole="Books" ToRole="Categories" />
+          <NavigationProperty Name="Rent_Details" Relationship="Self.FK_Rent_Details_Books" FromRole="Books" ToRole="Rent_Details" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="cateID" />
+          </Key>
+          <Property Name="cateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="keywords" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="Self.FK_Books_Categories" FromRole="Categories" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="Major">
+          <Key>
+            <PropertyRef Name="majorID" />
+          </Key>
+          <Property Name="majorID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="majorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Students_Majors" FromRole="Majors" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="posID" />
+          </Key>
+          <Property Name="posID" Type="Int32" Nullable="false" />
+          <Property Name="posName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Administrators" Relationship="Self.FK_Administrators_Positions" FromRole="Positions" ToRole="Administrators" />
+        </EntityType>
+        <EntityType Name="Rent_Details">
+          <Key>
+            <PropertyRef Name="stu_userName" />
+            <PropertyRef Name="callNumber" />
+          </Key>
+          <Property Name="stu_userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="callNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="unitQuantity" Type="Int32" />
+          <Property Name="issueDate" Type="DateTime" Precision="0" />
+          <Property Name="dueDate" Type="DateTime" Precision="0" />
+          <Property Name="issueStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="checkOutDate" Type="DateTime" Precision="0" />
+          <Property Name="lateFees" Type="Int32" />
+          <Property Name="number_Date_Late" Type="Int32" />
+          <Property Name="totalFees" Type="Int32" />
+          <NavigationProperty Name="AccountStudent" Relationship="Self.FK_Rent_Details_AccountStudent" FromRole="Rent_Details" ToRole="AccountStudent" />
+          <NavigationProperty Name="Book" Relationship="Self.FK_Rent_Details_Books" FromRole="Rent_Details" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="stuID" />
+          </Key>
+          <Property Name="stuID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stuFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuPhone" Type="Int64" />
+          <Property Name="majorID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountStudents" Relationship="Self.FK_AccountStudent_Students" FromRole="Students" ToRole="AccountStudent" />
+          <NavigationProperty Name="Major" Relationship="Self.FK_Students_Majors" FromRole="Students" ToRole="Majors" />
+        </EntityType>
+        <EntityType Name="v_AccountAdmin">
+          <Key>
+            <PropertyRef Name="userName" />
+            <PropertyRef Name="posID" />
+          </Key>
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="statusAdminAcc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="posID" Type="Int32" Nullable="false" />
+          <Property Name="posName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="v_AccountAdmins">
+          <Key>
+            <PropertyRef Name="userName" />
+            <PropertyRef Name="posID" />
+          </Key>
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="statusAdminAcc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="posID" Type="Int32" Nullable="false" />
+          <Property Name="posName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="v_AccountStudents">
+          <Key>
+            <PropertyRef Name="stuID" />
+            <PropertyRef Name="stu_userName" />
+          </Key>
+          <Property Name="stuID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stuLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stu_userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stu_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="statusStuAcc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="v_RentalDetailsReport">
+          <Key>
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="callNumber" />
+            <PropertyRef Name="stu_userName" />
+            <PropertyRef Name="stuID" />
+          </Key>
+          <Property Name="Expr1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="callNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="unitQuantity" Type="Int32" />
+          <Property Name="issueDate" Type="DateTime" Precision="0" />
+          <Property Name="dueDate" Type="DateTime" Precision="0" />
+          <Property Name="issueStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="checkOutDate" Type="DateTime" Precision="0" />
+          <Property Name="lateFees" Type="Int32" />
+          <Property Name="number_Date_Late" Type="Int32" />
+          <Property Name="totalFees" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stu_userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stuID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stuFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuPhone" Type="Int64" />
+          <Property Name="majorID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="majorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="v_StudentInfo">
+          <Key>
+            <PropertyRef Name="stuID" />
+            <PropertyRef Name="stu_userName" />
+          </Key>
+          <Property Name="stuID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stuFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuPhone" Type="Int64" />
+          <Property Name="majorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stu_userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stu_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="statusStuAcc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="v_StudentManagementAPI">
+          <Key>
+            <PropertyRef Name="stuID" />
+            <PropertyRef Name="majorID" />
+            <PropertyRef Name="stu_userName" />
+          </Key>
+          <Property Name="stuID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stuFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stuPhone" Type="Int64" />
+          <Property Name="majorID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="majorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stu_userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stu_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="statusStuAcc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_AccountStudent_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="AccountStudent" Type="Self.AccountStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="stuID" />
+            </Principal>
+            <Dependent Role="AccountStudent">
+              <PropertyRef Name="stuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Details_AccountStudent">
+          <End Role="AccountStudent" Type="Self.AccountStudent" Multiplicity="1" />
+          <End Role="Rent_Details" Type="Self.Rent_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountStudent">
+              <PropertyRef Name="stu_userName" />
+            </Principal>
+            <Dependent Role="Rent_Details">
+              <PropertyRef Name="stu_userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administrators_Positions">
+          <End Role="Positions" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Administrators" Type="Self.Administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="posID" />
+            </Principal>
+            <Dependent Role="Administrators">
+              <PropertyRef Name="posID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Books_Categories">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="cateID" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rent_Details_Books">
+          <End Role="Books" Type="Self.Book" Multiplicity="1" />
+          <End Role="Rent_Details" Type="Self.Rent_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="callNumber" />
+            </Principal>
+            <Dependent Role="Rent_Details">
+              <PropertyRef Name="callNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Majors">
+          <End Role="Majors" Type="Self.Major" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Majors">
+              <PropertyRef Name="majorID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="majorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibraryDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountStudents" EntityType="Self.AccountStudent" />
+          <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Majors" EntityType="Self.Major" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="Rent_Details" EntityType="Self.Rent_Details" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="v_AccountAdmin" EntityType="Self.v_AccountAdmin" />
+          <EntitySet Name="v_AccountAdmins" EntityType="Self.v_AccountAdmins" />
+          <EntitySet Name="v_AccountStudents" EntityType="Self.v_AccountStudents" />
+          <EntitySet Name="v_RentalDetailsReport" EntityType="Self.v_RentalDetailsReport" />
+          <EntitySet Name="v_StudentInfo" EntityType="Self.v_StudentInfo" />
+          <EntitySet Name="v_StudentManagementAPI" EntityType="Self.v_StudentManagementAPI" />
+          <AssociationSet Name="FK_AccountStudent_Students" Association="Self.FK_AccountStudent_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="AccountStudent" EntitySet="AccountStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Details_AccountStudent" Association="Self.FK_Rent_Details_AccountStudent">
+            <End Role="AccountStudent" EntitySet="AccountStudents" />
+            <End Role="Rent_Details" EntitySet="Rent_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administrators_Positions" Association="Self.FK_Administrators_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Administrators" EntitySet="Administrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Books_Categories" Association="Self.FK_Books_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rent_Details_Books" Association="Self.FK_Rent_Details_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Rent_Details" EntitySet="Rent_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Majors" Association="Self.FK_Students_Majors">
+            <End Role="Majors" EntitySet="Majors" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <FunctionImport Name="hl_StudentInfo" ReturnType="Collection(LibraryDBModel.hl_StudentInfo_Result)">
+            <Parameter Name="stuUserName" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="hl_StudentInfo_Result">
+          <Property Type="String" Name="stuID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="stuFirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="stuLastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="stuAddress" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="stuPhone" Nullable="true" />
+          <Property Type="String" Name="majorName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="stu_userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="stu_password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="statusStuAcc" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LibraryDBModelStoreContainer" CdmEntityContainer="LibraryDBEntities">
+          <EntitySetMapping Name="AccountStudents">
+            <EntityTypeMapping TypeName="LibraryDBModel.AccountStudent">
+              <MappingFragment StoreEntitySet="AccountStudent">
+                <ScalarProperty Name="stu_userName" ColumnName="stu_userName" />
+                <ScalarProperty Name="stu_password" ColumnName="stu_password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="stuID" ColumnName="stuID" />
+                <ScalarProperty Name="statusStuAcc" ColumnName="statusStuAcc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="LibraryDBModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrators">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="posID" ColumnName="posID" />
+                <ScalarProperty Name="statusAdminAcc" ColumnName="statusAdminAcc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="LibraryDBModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="callNumber" ColumnName="callNumber" />
+                <ScalarProperty Name="ISBN_Number" ColumnName="ISBN_Number" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="authorName" ColumnName="authorName" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="statusBook" ColumnName="statusBook" />
+                <ScalarProperty Name="special" ColumnName="special" />
+                <ScalarProperty Name="lasted" ColumnName="lasted" />
+                <ScalarProperty Name="views" ColumnName="views" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="LibraryDBModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="cateID" ColumnName="cateID" />
+                <ScalarProperty Name="cateName" ColumnName="cateName" />
+                <ScalarProperty Name="keywords" ColumnName="keywords" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Majors">
+            <EntityTypeMapping TypeName="LibraryDBModel.Major">
+              <MappingFragment StoreEntitySet="Majors">
+                <ScalarProperty Name="majorID" ColumnName="majorID" />
+                <ScalarProperty Name="majorName" ColumnName="majorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="LibraryDBModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="posID" ColumnName="posID" />
+                <ScalarProperty Name="posName" ColumnName="posName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rent_Details">
+            <EntityTypeMapping TypeName="LibraryDBModel.Rent_Details">
+              <MappingFragment StoreEntitySet="Rent_Details">
+                <ScalarProperty Name="stu_userName" ColumnName="stu_userName" />
+                <ScalarProperty Name="callNumber" ColumnName="callNumber" />
+                <ScalarProperty Name="unitQuantity" ColumnName="unitQuantity" />
+                <ScalarProperty Name="issueDate" ColumnName="issueDate" />
+                <ScalarProperty Name="dueDate" ColumnName="dueDate" />
+                <ScalarProperty Name="issueStatus" ColumnName="issueStatus" />
+                <ScalarProperty Name="checkOutDate" ColumnName="checkOutDate" />
+                <ScalarProperty Name="lateFees" ColumnName="lateFees" />
+                <ScalarProperty Name="number_Date_Late" ColumnName="number_Date_Late" />
+                <ScalarProperty Name="totalFees" ColumnName="totalFees" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="LibraryDBModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="stuID" ColumnName="stuID" />
+                <ScalarProperty Name="stuFirstName" ColumnName="stuFirstName" />
+                <ScalarProperty Name="stuLastName" ColumnName="stuLastName" />
+                <ScalarProperty Name="stuAddress" ColumnName="stuAddress" />
+                <ScalarProperty Name="stuPhone" ColumnName="stuPhone" />
+                <ScalarProperty Name="majorID" ColumnName="majorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_AccountAdmin">
+            <EntityTypeMapping TypeName="LibraryDBModel.v_AccountAdmin">
+              <MappingFragment StoreEntitySet="v_AccountAdmin">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="statusAdminAcc" ColumnName="statusAdminAcc" />
+                <ScalarProperty Name="posID" ColumnName="posID" />
+                <ScalarProperty Name="posName" ColumnName="posName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_AccountAdmins">
+            <EntityTypeMapping TypeName="LibraryDBModel.v_AccountAdmins">
+              <MappingFragment StoreEntitySet="v_AccountAdmins">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="statusAdminAcc" ColumnName="statusAdminAcc" />
+                <ScalarProperty Name="posID" ColumnName="posID" />
+                <ScalarProperty Name="posName" ColumnName="posName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_AccountStudents">
+            <EntityTypeMapping TypeName="LibraryDBModel.v_AccountStudents">
+              <MappingFragment StoreEntitySet="v_AccountStudents">
+                <ScalarProperty Name="stuID" ColumnName="stuID" />
+                <ScalarProperty Name="stuLastName" ColumnName="stuLastName" />
+                <ScalarProperty Name="stuFirstName" ColumnName="stuFirstName" />
+                <ScalarProperty Name="stu_userName" ColumnName="stu_userName" />
+                <ScalarProperty Name="stu_password" ColumnName="stu_password" />
+                <ScalarProperty Name="statusStuAcc" ColumnName="statusStuAcc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_RentalDetailsReport">
+            <EntityTypeMapping TypeName="LibraryDBModel.v_RentalDetailsReport">
+              <MappingFragment StoreEntitySet="v_RentalDetailsReport">
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="callNumber" ColumnName="callNumber" />
+                <ScalarProperty Name="unitQuantity" ColumnName="unitQuantity" />
+                <ScalarProperty Name="issueDate" ColumnName="issueDate" />
+                <ScalarProperty Name="dueDate" ColumnName="dueDate" />
+                <ScalarProperty Name="issueStatus" ColumnName="issueStatus" />
+                <ScalarProperty Name="checkOutDate" ColumnName="checkOutDate" />
+                <ScalarProperty Name="lateFees" ColumnName="lateFees" />
+                <ScalarProperty Name="number_Date_Late" ColumnName="number_Date_Late" />
+                <ScalarProperty Name="totalFees" ColumnName="totalFees" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="stu_userName" ColumnName="stu_userName" />
+                <ScalarProperty Name="stuID" ColumnName="stuID" />
+                <ScalarProperty Name="stuFirstName" ColumnName="stuFirstName" />
+                <ScalarProperty Name="stuLastName" ColumnName="stuLastName" />
+                <ScalarProperty Name="stuAddress" ColumnName="stuAddress" />
+                <ScalarProperty Name="stuPhone" ColumnName="stuPhone" />
+                <ScalarProperty Name="majorID" ColumnName="majorID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="majorName" ColumnName="majorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_StudentInfo">
+            <EntityTypeMapping TypeName="LibraryDBModel.v_StudentInfo">
+              <MappingFragment StoreEntitySet="v_StudentInfo">
+                <ScalarProperty Name="stuID" ColumnName="stuID" />
+                <ScalarProperty Name="stuFirstName" ColumnName="stuFirstName" />
+                <ScalarProperty Name="stuLastName" ColumnName="stuLastName" />
+                <ScalarProperty Name="stuAddress" ColumnName="stuAddress" />
+                <ScalarProperty Name="stuPhone" ColumnName="stuPhone" />
+                <ScalarProperty Name="majorName" ColumnName="majorName" />
+                <ScalarProperty Name="stu_userName" ColumnName="stu_userName" />
+                <ScalarProperty Name="stu_password" ColumnName="stu_password" />
+                <ScalarProperty Name="statusStuAcc" ColumnName="statusStuAcc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_StudentManagementAPI">
+            <EntityTypeMapping TypeName="LibraryDBModel.v_StudentManagementAPI">
+              <MappingFragment StoreEntitySet="v_StudentManagementAPI">
+                <ScalarProperty Name="stuID" ColumnName="stuID" />
+                <ScalarProperty Name="stuFirstName" ColumnName="stuFirstName" />
+                <ScalarProperty Name="stuLastName" ColumnName="stuLastName" />
+                <ScalarProperty Name="stuAddress" ColumnName="stuAddress" />
+                <ScalarProperty Name="stuPhone" ColumnName="stuPhone" />
+                <ScalarProperty Name="majorID" ColumnName="majorID" />
+                <ScalarProperty Name="majorName" ColumnName="majorName" />
+                <ScalarProperty Name="stu_userName" ColumnName="stu_userName" />
+                <ScalarProperty Name="stu_password" ColumnName="stu_password" />
+                <ScalarProperty Name="statusStuAcc" ColumnName="statusStuAcc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="hl_StudentInfo" FunctionName="LibraryDBModel.Store.hl_StudentInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LibraryDBModel.hl_StudentInfo_Result">
+                <ScalarProperty Name="stuID" ColumnName="stuID" />
+                <ScalarProperty Name="stuFirstName" ColumnName="stuFirstName" />
+                <ScalarProperty Name="stuLastName" ColumnName="stuLastName" />
+                <ScalarProperty Name="stuAddress" ColumnName="stuAddress" />
+                <ScalarProperty Name="stuPhone" ColumnName="stuPhone" />
+                <ScalarProperty Name="majorName" ColumnName="majorName" />
+                <ScalarProperty Name="stu_userName" ColumnName="stu_userName" />
+                <ScalarProperty Name="stu_password" ColumnName="stu_password" />
+                <ScalarProperty Name="statusStuAcc" ColumnName="statusStuAcc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

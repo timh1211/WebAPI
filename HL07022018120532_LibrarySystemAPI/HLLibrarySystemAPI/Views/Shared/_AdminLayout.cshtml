@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Library Management - @ViewBag.Title</title>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,400italic,300italic' rel='stylesheet' type='text/css'>
+    <!--AngularJs-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <script type="text/javascript">
+        document.write('<style type="text/css">body{padding-bottom:20px}</style><a href="#" target="_blank"><img style="position:fixed;z-index:9999;top:65px;left:0" src="https://tuhocmmo.com/wp-content/uploads/2018/01/banner_left.png" _cke_saved_src="https://tuhocmmo.com/wp-content/uploads/2018/01/banner_left.png"/></a><a href="#" target="_blank"><img style="position:fixed;z-index:9999;top:65px;right:0" src="https://tuhocmmo.com/wp-content/uploads/2018/01/banner_right.png"/></a><div style="position:fixed;z-index:9999;bottom:-50px;left:0;width:100%;height:104px;"></div><a href="#" target="_blank"><img style="position:fixed;z-index:9999;bottom:20px;left:20px" src="https://tuhocmmo.com/wp-content/uploads/2018/01/banner_header.png"/></a>');
+        var no = 100;
+        var ie4up = (document.all) ? 1 : 0;
+        var ns6up = (document.getElementById && !document.all) ? 1 : 0;
+        function iecompattest() { return (document.compatMode && document.compatMode != 'BackCompat') ? document.documentElement : document.body } var dx, xp, yp; var am, stx, sty; var i, doc_width = 800, doc_height = 600; if (ns6up) { doc_width = self.innerWidth; doc_height = self.innerHeight } else if (ie4up) { doc_width = iecompattest().clientWidth; doc_height = iecompattest().clientHeight } dx = new Array(); xp = new Array(); yp = new Array(); am = new Array(); stx = new Array(); sty = new Array(); for (i = 0; i < no; ++i) { dx[i] = 0; xp[i] = Math.random() * (doc_width - 50); yp[i] = Math.random() * doc_height; am[i] = Math.random() * 20; stx[i] = 0.02 + Math.random() / 10; sty[i] = 0.7 + Math.random(); if (ie4up || ns6up) { document.write('<div id="dot' + i + '" style="POSITION:absolute;Z-INDEX:' + i + ';VISIBILITY:visible;TOP:15px;LEFT:15px;"><span style="font-size:18px;color:#fff">*</span><\/div>') } }
+
+    </script>
+    <div class="container-fluid hl-container">
+        @*<header class="row hl-header">
+            @Html.Partial("_HeaderSingleAdmin")
+        </header>*@
+
+        <section class="hl-sheet row" style="width: 100%;">
+            @RenderBody()
+        </section>
+    </div>
+</body>
+</html>
+
+<style>
+    .hl-sheet {
+        padding-left: 0 !important;
+        text-align: center;
+    }
+</style>

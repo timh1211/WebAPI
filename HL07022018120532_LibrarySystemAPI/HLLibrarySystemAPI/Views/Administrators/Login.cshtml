@@ -1,0 +1,134 @@
+﻿@model HLLibrarySystemAPI.Models.v_AccountAdmin
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="hl-login-block">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <img src="~/Images/logo/adminavt.gif" alt="Sign In" />
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    @if (ViewBag.Id != null)
+                    {
+                        @Html.EditorFor(model => model.userName, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                                @style = "display: block",
+                                @placeholder = "Enter your account",
+                                @Value = ViewBag.Id
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger hl-error" })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.userName, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                                @style = "display: block",
+                                @placeholder = "Enter your account"
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger hl-error" })
+                    }
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    @if (ViewBag.Id != null)
+                    {
+                        @Html.EditorFor(model => model.password, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                                @type = "password",
+                                @style = "display: block",
+                                @placeholder = "Enter your password",
+                                @Value = ViewBag.Password
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger hl-error" })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.password, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                                @type = "password",
+                                @style = "display: block",
+                                @placeholder = "Enter your password"
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger hl-error" })
+                    }
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="hl-chk-remember">
+                @Html.CheckBox("Remember") Remember me?
+            </div>
+            <div class="form-group hl-btn-submit">
+                <div class="col-md-12">
+                    <input type="submit" value="SIGN IN" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .hl-login-block {
+        display: inline-block;
+        height: 40%;
+        width: 30%;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 5px 3px #ccc;
+        padding-bottom: 20px;
+        margin-top: 35px;
+        /*margin-left: -65px;*/
+        margin-left: 45px;
+        transition-duration: 1s;
+        transition-timing-function: ease-in-out;
+        margin-bottom: 20px;
+    }
+
+        .hl-login-block img:first-child {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            height: 30%;
+            width: 30%;
+        }
+
+    .hl-chk-remember {
+        padding-bottom: 10px;
+    }
+
+    .hl-login-block .form-control {
+        padding: 20px;
+    }
+
+    .hl-btn-submit input, .hl-btn-submit a {
+        width: 65%;
+    }
+
+    li {
+        list-style-type: none;
+    }
+</style>

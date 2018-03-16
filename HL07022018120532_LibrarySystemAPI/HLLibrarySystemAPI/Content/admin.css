@@ -1,0 +1,48 @@
+﻿
+/******/
+*, html {
+    margin: 0px;
+    padding: 0px;
+}
+
+.hl-reset-css {
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    list-style-type: none !important;
+}
+
+a {
+    text-decoration: none !important;
+    color: rgb(71, 145, 200) !important;
+}
+/******/
+
+/*head*/
+.hl-logo a {
+    padding: 0 !important;
+}
+    .hl-dropdown {
+        font-weight: bold;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .hl-dropdown a {
+        padding: 17.9px;
+    }
+
+.hl-dropdown a:hover {
+    background-color: #9BE8CB !important;
+}
+
+.hl__head nav{
+    background: white !important;
+}
+
+.hl__head--nav {
+
+}
+/*head*/

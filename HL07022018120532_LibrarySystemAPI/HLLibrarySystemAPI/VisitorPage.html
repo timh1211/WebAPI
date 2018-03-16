@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Library Management</title>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!-- Angular LINQ -->
+    <script src="Scripts/node_modules/angular/angular.min.js"></script>
+    <script src="Scripts/node_modules/angular-linq/dist/ngLinq.min.js"></script>
+    <script src="Scripts/node_modules/linq/linq.min.js"></script>
+    <!--My CSS-->
+    <link href="Content/Visitor.css" rel="stylesheet" />
+    <!--My Script-->
+    <script src="Scripts/Visitor.js"></script>
+    <!-- Cloud Zoom -->
+    <!--<script src="Scripts/cloud-zoom.1.0.2.min.js"></script>-->
+    <!--<script src="Scripts/jquery.js"></script>-->
+    <!--<link href="Content/cloud-zoom.css" rel="stylesheet" />-->
+</head>
+<body>
+    <div class="container-fluid" ng-app="myApp" ng-controller="myCtrl">
+        <!-- HL__head -->
+        <div class="row hl__head">
+            <nav class="nav navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header navbar-left hl-logo">
+                        <a class="navbar-brand" href="#"><img src="../Images/logo/logo1.gif" height="50" style="margin: 2px; margin-left: 35px;" title="Library Management" /></a>
+                    </div>
+                    <ul class="nav navbar-nav nav-tabs hl__head--nav">
+                        <li class="active"><a data-toggle="tab" href="#student-block">Home</a></li>
+                    </ul>
+                    <div class="navbar-right dropdown hl-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="stu-after-login"><a href=""><span class="glyphicon glyphicon-share" hidden></span> Hi! {{sessionStudents[1]}}</a></li>
+                            <li class="divider"></li>
+                            <li class="stu-after-login"><a href="/StudentsMVC/SignOut"><span class="glyphicon glyphicon-share"></span> Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- HL__body -->
+        <div class="row hl__body tab-content">
+            <!-- Books Block -->
+            <div class="col-md-12" style="margin-left: -20px;">
+                <div ng-repeat="book in books">
+                    <div class="col-md-2 hl-book">
+                        <div class="panel panel-default">
+                            <div class="panel-body text-center">
+                                <img src="{{book.image}}" width="126"/>
+                                <button href="#" class="btn hl-btn-details" 
+                                        data-toggle="modal" data-target="#bookDetails" 
+                                        ng-click="getBook(book.callNumber)">Learn more</button>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="hl-title-book">{{book.title}}</div>
+                                <div class="hl-authorname">{{book.authorName}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal edit, add -->
+        <!-- Borrow Edit -->
+        <div class="modal fade" id="bookDetails" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body row">
+                        <div class="col-md-5">
+                            <!--<a href="{{book.image}}" id="zoom1" rel="showTitle:false,adjustX:83, adjustY:50">-->
+                            <img src="{{book.image}}" width="126" alt="{{book.title}}" title="{{book.title}}" />
+                            <!--</a>-->
+                        </div>
+                        <div class="col-md-7">
+                            <h3>{{book.title}}</h3>
+                            <a href="https://en.wikipedia.org/wiki/{{book.authorName}}">Author: {{book.authorName}}</a>
+                            <p style="color: #ccc">ISBN-13: {{book.ISBN_Number}}</p>
+                            <p>The time allowed: <span style="color: red;">15 days</span></p>
+                            <p>If you are overdue: <span style="color: red;">10 cents/day</span></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" id="updateButton" data-dismiss="modal"
+                                data-toggle="modal" data-target="#borrowNow"
+                                class="btn btn-primary" ng-click="resetDate();">
+                            Borrow Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Borrow Now -->
+        <div class="modal fade" id="borrowNow" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body form-group">
+                        <input type="text" placeholder="Username" readonly ng-model="borrow.stu_userName = sessionStudents[0]" class="form-control" />
+                        <input type="text" placeholder="Call Number" readonly ng-model="borrow.callNumber = book.callNumber" class="form-control" />
+                        <input type="date" id="issueDate" min="new Date()" max="new Date() + 15" ng-model="borrow.issueDate" class="form-control" />
+                        <input type="date" id="dueDate" readonly ng-model="borrow.dueDate" class="form-control" />
+                        <input type="text" value="10 Cents per Late Day" id="unreadonly12" readonly class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" id="updateButton" data-dismiss="modal" class="btn btn-primary" ng-click="createOrder();">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal edit, add -->
+        <div class="row hl__feet">
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Forgot";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@Html.ValidationSummary(true)
+@using (Html.BeginForm())
+{
+    <div class="row" style="padding-left: 55px;">
+        <div class="panel panel-success col-md-4 col-md-offset-4" style="padding: 0;">
+            <div class="panel-heading">
+                <h2>Forgot Password</h2>
+                <div class="form-group col-md-offset-2">
+                    @Html.TextBox("Id", null, new { @class = "form-control", @placeholder = "Username" })
+                </div>
+                <div class="form-group col-md-offset-2">
+                    @Html.TextBox("Email", null, new { @class = "form-control", @placeholder = "Email Address" })
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-question-sign"></span>
+                        Retrieve
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
